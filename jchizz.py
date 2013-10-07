@@ -5,12 +5,6 @@ except ImportError:
     # for Python3
     from tkinter import *
 
-try:
-    # for Python2
-    from Tkinter import *
-except ImportError:
-    # for Python3
-    from tkinter import *
 import _thread
 import sys
 
@@ -52,7 +46,6 @@ class Application(Frame):
 		message = self.entry_field.get()
 		name = self.name
 		message = name + ": " + message
-		print(message)
 		tcpCliSock.send(bytes(message, 'UTF-8'))
 
 		# Clear the entry field
