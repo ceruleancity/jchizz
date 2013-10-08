@@ -10,7 +10,7 @@ import sys
 
 from socket import *
 
-HOST = 'localhost'
+HOST = '192.168.1.34'
 PORT = 21567
 BUFSIZE = 1024
 tcpCliSock = socket(AF_INET, SOCK_STREAM)
@@ -19,24 +19,24 @@ class Application(Frame):
 	def __init__(self, master, argv):
 		Frame.__init__(self, master)
 
-		ADDR = (HOST, PORT)
+		# Setup handle
+		self.name = ""
 		if len(argv) > 1:
-			# First param is hostname
-			print("Received hostname ", argv[1])
-			ADDR = (argv[1], PORT)
+			# First param is username
+			self.name = argv[1]
+		else:
+			self.name = "Anonymous"
+		print("name is ", self.name)
+
+		ADDR = (HOST, PORT)
+		if len(argv) > 2:
+			# Second param is hostname
+			print("Received hostname ", argv[2])
+			ADDR = (argv[2], PORT)
 
 		# Connect to the server
 		tcpCliSock.connect(ADDR)
 		print("connected to ", ADDR )
-
-		# Setup handle
-		self.name = ""
-		if len(argv) > 2:
-			# Second param is username
-			self.name = argv[2]
-		else:
-			self.name = "Anonymous"
-		print("name is ", self.name)
 
 		self.grid()
 		self.create_widgets()
