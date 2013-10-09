@@ -10,7 +10,7 @@ import sys
 
 from socket import *
 
-HOST = '192.168.1.34'
+HOST = '54.211.186.20'
 PORT = 21567
 BUFSIZE = 1024
 tcpCliSock = socket(AF_INET, SOCK_STREAM)
