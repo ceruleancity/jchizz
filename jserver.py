@@ -30,12 +30,14 @@ class SecondaryServerSocket(asyncore.dispatcher_with_send):
 		try:
 			peername = self.getpeername()
 			del clients[peername]
+			print ("Disconnected from ", peername)
+			clients_list = clients.values()
+			for i in clients_list:
+				i.send(bytes('Disconnected from ' + str(peername) + '\n', 'UTF-8'))
 		except socket.error:
-			peername = 'somewhere'
-		print ("Disconnected from ", peername)
-		clients_list = clients.values()
-		for i in clients_list:
-			i.send(bytes('Disconnected from ' + str(peername) + '\n', 'UTF-8'))
+			print("Error disconnecting client...")
+		except Exception:
+			print("Error unknown")
 
 MainServerSocket(21567)
 asyncore.loop( )
