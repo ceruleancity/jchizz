@@ -29,9 +29,9 @@ class SecondaryServerSocket(asyncore.dispatcher_with_send):
 	def handle_close(self):
 		try:
 			peername = self.getpeername()
+			del clients[peername]
 		except socket.error:
 			peername = 'somewhere'
-		del clients[peername]
 		print ("Disconnected from ", peername)
 		clients_list = clients.values()
 		for i in clients_list:
